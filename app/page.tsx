@@ -1,14 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
+import { Logo } from '@/components/common/Logo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Network, BarChart3, Settings, UserPlus, Search, TrendingUp, Calendar } from 'lucide-react';
+import { Users, Network, BarChart3, Settings, UserPlus, Search, TrendingUp, Calendar, Moon, Sun } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const features = [
     {
@@ -69,17 +77,51 @@ export default function HomePage() {
     router.push(path);
   };
 
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-4 py-8">
+          <div className="animate-pulse">
+            <div className="h-16 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-48 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Personal Network Management
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            인맥 관계를 체계적으로 관리하는 스마트한 도구
-          </p>
+        {/* Header with Logo and Theme Toggle */}
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex items-center gap-4">
+            <Logo size={60} />
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+                Personal Network Management
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+                인맥 관계를 체계적으로 관리하는 스마트한 도구
+              </p>
+            </div>
+          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="rounded-full"
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
         </div>
 
         {/* Quick Actions */}
@@ -90,7 +132,7 @@ export default function HomePage() {
               variant="outline"
               size="lg"
               onClick={action.action}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:scale-105 transition-transform"
             >
               {action.icon}
               {action.label}
@@ -103,17 +145,17 @@ export default function HomePage() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+              className="hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 border-0 dark:bg-gray-800/50 backdrop-blur"
               onClick={() => handleFeatureClick(feature.path)}
             >
               <CardHeader>
-                <div className={`${feature.color} text-white p-3 rounded-lg inline-block mb-4`}>
+                <div className={`${feature.color} text-white p-3 rounded-lg inline-block mb-4 shadow-lg`}>
                   {feature.icon}
                 </div>
-                <CardTitle>{feature.title}</CardTitle>
+                <CardTitle className="text-xl">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardDescription className="text-base">{feature.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -121,33 +163,43 @@ export default function HomePage() {
 
         {/* Stats Overview */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card>
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-500">총 연락처</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-500 dark:text-gray-400">총 연락처</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-gray-500">등록된 인맥</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">0</div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">등록된 인맥</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-500">이번 달 미팅</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-500 dark:text-gray-400">이번 달 미팅</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-gray-500">예정된 일정</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent">0</div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">예정된 일정</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-gray-500">활동 점수</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-500 dark:text-gray-400">활동 점수</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-gray-500">이번 주 활동</p>
+              <div className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">0</div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">이번 주 활동</p>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-16 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p>© 2024 PNM - Personal Network Management System</p>
+          <p className="mt-2">
+            <a href="http://localhost:3001" className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
+              http://localhost:3001
+            </a>
+          </p>
         </div>
       </div>
     </div>
