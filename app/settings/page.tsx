@@ -6,274 +6,219 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   ArrowLeft, 
-  User,
-  Bell,
-  Shield,
+  Settings, 
+  User, 
+  Bell, 
+  Shield, 
   Database,
-  Globe,
   Moon,
   Sun,
-  Smartphone,
+  Monitor,
   Download,
   Upload,
-  Trash2,
-  Key,
-  Mail,
-  Save
+  Trash2
 } from 'lucide-react';
 
 export default function SettingsPage() {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
 
-  const settingsSections = [
-    {
-      title: '프로필 설정',
-      icon: User,
-      items: [
-        { label: '이름', value: '사용자', type: 'text' },
-        { label: '이메일', value: 'user@example.com', type: 'email' },
-        { label: '전화번호', value: '010-0000-0000', type: 'tel' },
-      ],
-    },
-    {
-      title: '알림 설정',
-      icon: Bell,
-      items: [
-        { label: '이메일 알림', value: true, type: 'switch' },
-        { label: '푸시 알림', value: false, type: 'switch' },
-        { label: '일정 리마인더', value: true, type: 'switch' },
-      ],
-    },
-    {
-      title: '개인정보 보호',
-      icon: Shield,
-      items: [
-        { label: '프로필 공개', value: '친구만', type: 'select', options: ['전체 공개', '친구만', '비공개'] },
-        { label: '활동 기록', value: true, type: 'switch' },
-        { label: '데이터 수집', value: false, type: 'switch' },
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => router.push('/')}
-              className="rounded-full"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                설정
-              </h1>
-              <p className="text-gray-600 dark:text-gray-300">
-                시스템 설정 및 환경 구성
-              </p>
-            </div>
-          </div>
-          <Button>
-            <Save className="h-5 w-5 mr-2" />
-            저장
+        <div className="flex items-center gap-4 mb-8">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => router.push('/')}
+            className="rounded-full"
+          >
+            <ArrowLeft className="h-5 w-5" />
           </Button>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              설정
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              시스템 설정을 관리합니다
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Settings */}
-          <div className="lg:col-span-2 space-y-6">
-            {settingsSections.map((section, index) => (
-              <Card key={index} className="border-0 dark:bg-gray-800/50 backdrop-blur">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <section.icon className="h-5 w-5 text-gray-500" />
-                    <CardTitle>{section.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {section.items.map((item, itemIndex) => (
-                      <div key={itemIndex} className="flex items-center justify-between">
-                        <label className="text-sm font-medium">
-                          {item.label}
-                        </label>
-                        {item.type === 'text' || item.type === 'email' || item.type === 'tel' ? (
-                          <input
-                            type={item.type}
-                            defaultValue={item.value as string}
-                            className="w-1/2 px-3 py-1 border rounded-lg dark:bg-gray-900 dark:border-gray-700"
-                          />
-                        ) : item.type === 'switch' ? (
-                          <button
-                            className={`w-12 h-6 rounded-full transition-colors ${
-                              item.value ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
-                            }`}
-                          >
-                            <div
-                              className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                                item.value ? 'translate-x-6' : 'translate-x-0.5'
-                              }`}
-                            />
-                          </button>
-                        ) : item.type === 'select' ? (
-                          <select className="px-3 py-1 border rounded-lg dark:bg-gray-900 dark:border-gray-700">
-                            {item.options?.map((option) => (
-                              <option key={option} selected={option === item.value}>
-                                {option}
-                              </option>
-                            ))}
-                          </select>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+        {/* Settings Sections */}
+        <div className="space-y-6">
+          {/* Profile Settings */}
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="h-5 w-5" />
+                프로필 설정
+              </CardTitle>
+              <CardDescription>
+                사용자 정보를 관리합니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">이름</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">사용자</p>
+                </div>
+                <Button variant="outline" size="sm">수정</Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">이메일</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">user@example.com</p>
+                </div>
+                <Button variant="outline" size="sm">수정</Button>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Data Management */}
-            <Card className="border-0 dark:bg-gray-800/50 backdrop-blur">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <Database className="h-5 w-5 text-gray-500" />
-                  <CardTitle>데이터 관리</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    <Download className="h-4 w-4 mr-2" />
-                    데이터 내보내기
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Upload className="h-4 w-4 mr-2" />
-                    데이터 가져오기
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start text-red-600 hover:text-red-700">
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    모든 데이터 삭제
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Appearance Settings */}
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Monitor className="h-5 w-5" />
+                테마 설정
+              </CardTitle>
+              <CardDescription>
+                화면 테마를 선택합니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-4">
+                <Button
+                  variant={theme === 'light' ? 'default' : 'outline'}
+                  onClick={() => setTheme('light')}
+                  className="flex items-center gap-2"
+                >
+                  <Sun className="h-4 w-4" />
+                  라이트
+                </Button>
+                <Button
+                  variant={theme === 'dark' ? 'default' : 'outline'}
+                  onClick={() => setTheme('dark')}
+                  className="flex items-center gap-2"
+                >
+                  <Moon className="h-4 w-4" />
+                  다크
+                </Button>
+                <Button
+                  variant={theme === 'system' ? 'default' : 'outline'}
+                  onClick={() => setTheme('system')}
+                  className="flex items-center gap-2"
+                >
+                  <Monitor className="h-4 w-4" />
+                  시스템
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Sidebar Settings */}
-          <div className="space-y-6">
-            {/* Theme Settings */}
-            <Card className="border-0 dark:bg-gray-800/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle>테마 설정</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <button
-                    onClick={() => setTheme('light')}
-                    className={`w-full p-3 rounded-lg border flex items-center gap-3 transition-colors ${
-                      theme === 'light'
-                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                        : 'border-gray-200 dark:border-gray-700'
-                    }`}
-                  >
-                    <Sun className="h-5 w-5" />
-                    <span>라이트 모드</span>
-                  </button>
-                  <button
-                    onClick={() => setTheme('dark')}
-                    className={`w-full p-3 rounded-lg border flex items-center gap-3 transition-colors ${
-                      theme === 'dark'
-                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                        : 'border-gray-200 dark:border-gray-700'
-                    }`}
-                  >
-                    <Moon className="h-5 w-5" />
-                    <span>다크 모드</span>
-                  </button>
-                  <button
-                    onClick={() => setTheme('system')}
-                    className={`w-full p-3 rounded-lg border flex items-center gap-3 transition-colors ${
-                      theme === 'system'
-                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                        : 'border-gray-200 dark:border-gray-700'
-                    }`}
-                  >
-                    <Smartphone className="h-5 w-5" />
-                    <span>시스템 설정</span>
-                  </button>
+          {/* Notification Settings */}
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Bell className="h-5 w-5" />
+                알림 설정
+              </CardTitle>
+              <CardDescription>
+                알림을 관리합니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">이메일 알림</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">중요한 업데이트를 이메일로 받기</p>
                 </div>
-              </CardContent>
-            </Card>
+                <Button variant="outline" size="sm">설정</Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">푸시 알림</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">브라우저 푸시 알림 받기</p>
+                </div>
+                <Button variant="outline" size="sm">설정</Button>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Account Settings */}
-            <Card className="border-0 dark:bg-gray-800/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle>계정 설정</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    <Key className="h-4 w-4 mr-2" />
-                    비밀번호 변경
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Mail className="h-4 w-4 mr-2" />
-                    이메일 변경
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Shield className="h-4 w-4 mr-2" />
-                    2단계 인증
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Data Management */}
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="h-5 w-5" />
+                데이터 관리
+              </CardTitle>
+              <CardDescription>
+                데이터를 가져오거나 내보냅니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex gap-4">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Download className="h-4 w-4" />
+                  데이터 내보내기
+                </Button>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Upload className="h-4 w-4" />
+                  데이터 가져오기
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Language Settings */}
-            <Card className="border-0 dark:bg-gray-800/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle>언어 설정</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-3">
-                  <Globe className="h-5 w-5 text-gray-500" />
-                  <select className="flex-1 px-3 py-2 border rounded-lg dark:bg-gray-900 dark:border-gray-700">
-                    <option>한국어</option>
-                    <option>English</option>
-                    <option>日本語</option>
-                    <option>中文</option>
-                  </select>
+          {/* Security Settings */}
+          <Card className="dark:bg-gray-800/50 backdrop-blur border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                보안 설정
+              </CardTitle>
+              <CardDescription>
+                계정 보안을 관리합니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">비밀번호 변경</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">계정 비밀번호를 변경합니다</p>
                 </div>
-              </CardContent>
-            </Card>
+                <Button variant="outline" size="sm">변경</Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">2단계 인증</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">추가 보안을 위한 2단계 인증</p>
+                </div>
+                <Button variant="outline" size="sm">설정</Button>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* About */}
-            <Card className="border-0 dark:bg-gray-800/50 backdrop-blur">
-              <CardHeader>
-                <CardTitle>정보</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">버전</span>
-                    <span>2.0.0</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">업데이트</span>
-                    <span>최신 버전</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">라이선스</span>
-                    <span>MIT</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Danger Zone */}
+          <Card className="border-red-200 dark:border-red-900 dark:bg-gray-800/50 backdrop-blur">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-red-600 dark:text-red-400">
+                <Trash2 className="h-5 w-5" />
+                위험 구역
+              </CardTitle>
+              <CardDescription>
+                복구할 수 없는 작업입니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="destructive" className="flex items-center gap-2">
+                <Trash2 className="h-4 w-4" />
+                계정 삭제
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

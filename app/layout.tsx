@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -7,6 +7,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3001'),
   title: "PNM - Personal Network Management",
   description: "인맥 관계를 체계적으로 관리하는 스마트한 도구",
   manifest: "/manifest.json",
@@ -19,16 +20,6 @@ export const metadata: Metadata = {
       { url: "/icons/PNM_L/ios/PNM_L-180.png", media: "(prefers-color-scheme: light)" },
       { url: "/icons/PNM_D/ios/PNM_D-180.png", media: "(prefers-color-scheme: dark)" },
     ],
-  },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
   },
   openGraph: {
     title: "PNM - Personal Network Management",
@@ -57,6 +48,17 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "PNM",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
+  ],
 };
 
 export default function RootLayout({
