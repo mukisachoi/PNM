@@ -1,7 +1,7 @@
 {
   "name": "pnm-system",
   "version": "1.0.0",
-  "description": "Personal Network Management System - 인맥관리 및 행사 관계도 시각화 시스템",
+  "description": "Personal Network Management System",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
