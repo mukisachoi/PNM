@@ -22,7 +22,7 @@ const nextConfig = {
     NEXT_PUBLIC_APP_VERSION: process.env.npm_package_version,
   },
   
-  // PWA 설정
+  // 보안 헤더
   async headers() {
     return [
       {
@@ -40,39 +40,7 @@ const nextConfig = {
             key: 'X-XSS-Protection',
             value: '1; mode=block',
           },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
         ],
-      },
-      {
-        source: '/api/:path*',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: process.env.NEXT_PUBLIC_APP_URL || '*',
-          },
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS',
-          },
-          {
-            key: 'Access-Control-Allow-Headers',
-            value: 'X-Requested-With, Content-Type, Authorization',
-          },
-        ],
-      },
-    ]
-  },
-  
-  // 리다이렉트 설정
-  async redirects() {
-    return [
-      {
-        source: '/dashboard',
-        destination: '/dashboard/contacts',
-        permanent: false,
       },
     ]
   },
@@ -89,32 +57,18 @@ const nextConfig = {
       }
     }
     
-    // SVG 로더 설정
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    })
-    
     return config
-  },
-  
-  // 실험적 기능
-  experimental: {
-    // 서버 액션 활성화
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
   },
   
   // 타입스크립트 설정
   typescript: {
-    // 프로덕션 빌드 시 타입 에러 무시 (개발 중에만 사용)
+    // 개발 중 타입 에러 무시하지 않음
     ignoreBuildErrors: false,
   },
   
   // ESLint 설정
   eslint: {
-    // 프로덕션 빌드 시 ESLint 에러 무시 (개발 중에만 사용)
+    // 개발 중 ESLint 에러 무시하지 않음
     ignoreDuringBuilds: false,
   },
   
@@ -127,12 +81,6 @@ const nextConfig = {
   // 성능 최적화
   poweredByHeader: false,
   generateEtags: true,
-  
-  // 국제화 설정 (필요시 활성화)
-  // i18n: {
-  //   locales: ['ko', 'en'],
-  //   defaultLocale: 'ko',
-  // },
 }
 
 module.exports = nextConfig
