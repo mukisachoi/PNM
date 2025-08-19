@@ -1,7 +1,7 @@
 {
-  "name": "PNM - Personal Network Management",
-  "short_name": "PNM",
-  "description": "인맥 관계를 체계적으로 관리하는 스마트한 도구",
+  "name": "인맥관리 - People Network Management",
+  "short_name": "인맥관리",
+  "description": "체계적인 인맥 관리 시스템",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

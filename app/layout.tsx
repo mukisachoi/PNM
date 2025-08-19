@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3001'),
-  title: "PNM - Personal Network Management",
-  description: "인맥 관계를 체계적으로 관리하는 스마트한 도구",
+  title: "인맥관리 - PNM",
+  description: "체계적인 인맥 관리 시스템",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "PNM - Personal Network Management",
-    description: "인맥 관계를 체계적으로 관리하는 스마트한 도구",
+    title: "인맥관리 - PNM",
+    description: "체계적인 인맥 관리 시스템",
     url: "http://localhost:3001",
-    siteName: "PNM",
+    siteName: "인맥관리",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "PNM - Personal Network Management",
-    description: "인맥 관계를 체계적으로 관리하는 스마트한 도구",
+    title: "인맥관리 - PNM",
+    description: "체계적인 인맥 관리 시스템",
     images: ["/PNM_L.png"],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PNM",
+    title: "인맥관리",
   },
 };
 
@@ -71,7 +71,7 @@ export default function RootLayout({
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="PNM" />
+        <meta name="apple-mobile-web-app-title" content="인맥관리" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="apple-touch-icon" href="/icons/PNM_L/ios/PNM_L-180.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="/icons/PNM_L/ios/PNM_L-152.png" />

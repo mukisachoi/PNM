@@ -103,10 +103,10 @@ export default function HomePage() {
             <Logo size={60} />
             <div>
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-                Personal Network Management
+                인맥관리
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                인맥 관계를 체계적으로 관리하는 스마트한 도구
+                People Network Management System
               </p>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
 
         {/* Footer */}
         <div className="mt-16 text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>© 2024 PNM - Personal Network Management System</p>
+          <p>© 2024 PNM - People Network Management System</p>
           <p className="mt-2">
             <a href="http://localhost:3001" className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
               http://localhost:3001
